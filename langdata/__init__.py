@@ -28,33 +28,40 @@ class Language:
         )
 
 
+language_data: dict[str, Language] = None
+country_data: dict[str, dict[str, Any]] = None
+
 def load_languages() -> dict[str, Language]:
-    flags = _load_flags()
+    global language_data 
+    if not language_data:
+        flags = load_flags()
 
-    languages_path = base_dir.joinpath("languages.json")
-    with open(languages_path, "r", encoding="utf-8") as file:
-        languages = json.load(file)
+        languages_path = base_dir.joinpath("languages.json")
+        with open(languages_path, "r", encoding="utf-8") as file:
+            languages = json.load(file)
 
-    language_dict = {}
-    for language in languages:
-        country = language["country"]
-        language["flag"] = flags.get(country)["flag_4x3"]
-        lang = Language.from_dict(language)
-        language_dict[language["pt1"]] = lang
+        language_data = {}
+        for language in languages:
+            country = language["country"]
+            language["flag"] = flags.get(country)["flag_4x3"]
+            lang = Language.from_dict(language)
+            language_data[language["pt1"]] = lang
 
-    return language_dict
+    return language_data
 
 
-def _load_flags() -> dict[str, dict[str, Any]]:
-    countries_path = base_dir.joinpath("countries.json")
-    with open(countries_path, "r", encoding="utf-8") as file:
-        countries = json.load(file)
+def load_flags() -> dict[str, dict[str, Any]]:
+    global country_data
+    if not country_data:
+        countries_path = base_dir.joinpath("countries.json")
+        with open(countries_path, "r", encoding="utf-8") as file:
+            countries = json.load(file)
 
-    countries = {country["code"]: country for country in countries}
-    for country in list(countries.values()):
-        flag_1x1 = _create_icon(base_dir.joinpath(country["flag_1x1"]))
-        flag_4x3 = _create_icon(base_dir.joinpath(country["flag_4x3"]))
-        country["flag_1x1"] = flag_1x1
-        country["flag_4x3"] = flag_4x3
+        country_data = {country["code"]: country for country in countries}
+        for country in list(country_data.values()):
+            flag_1x1 = _create_icon(base_dir.joinpath(country["flag_1x1"]))
+            flag_4x3 = _create_icon(base_dir.joinpath(country["flag_4x3"]))
+            country["flag_1x1"] = flag_1x1
+            country["flag_4x3"] = flag_4x3
 
-    return countries
+    return country_data
