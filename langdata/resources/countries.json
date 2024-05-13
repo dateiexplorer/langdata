@@ -1119,6 +1119,15 @@
     "name": "Kosovo"
   },
   {
+    "capital": "Pristina",
+    "code": "ko",
+    "continent": "Europe",
+    "flag_1x1": "flags/1x1/xk.svg",
+    "flag_4x3": "flags/4x3/xk.svg",
+    "iso": false,
+    "name": "Kosovo"
+  },
+  {
     "capital": "Kuwait City",
     "code": "kw",
     "continent": "Asia",
