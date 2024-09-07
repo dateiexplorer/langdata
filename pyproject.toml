@@ -1,17 +1,14 @@
+[project]
+name = "langdata"
+version = "1.0.0"
+description = "Language data for languages in the world"
+authors = [{ name = "Justus Röderer", email = "mail@dateiexplorer.de" }]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "PySide6 >= 6.6.3",
+]
+
 [build-system]
 requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
-
-[project]
-name = "langdata"
-version = "0.0.1"
-description = "Language data for languages in the world"
-readme = "README.md"
-requires-python = ">=3.11"
-license = { file = "LICENSE" }
-authors = [
-    { name = "Justus Röderer", email = "mail@dateiexplorer.de" },
-]
-dependencies = [
-    "PySide6 >= 6.6.1"
-]

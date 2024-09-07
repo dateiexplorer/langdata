@@ -5,7 +5,7 @@ from typing import Any, Self
 
 from PySide6.QtGui import QIcon
 
-base_dir = Path(__file__).parent.joinpath("resources")
+BASE_DIR = Path(__file__).parent.joinpath("resources")
 
 
 def _create_icon(flag_path: Path) -> QIcon:
@@ -36,7 +36,7 @@ def load_languages() -> dict[str, Language]:
     if not language_data:
         flags = load_flags()
 
-        languages_path = base_dir.joinpath("languages.json")
+        languages_path = BASE_DIR.joinpath("languages.json")
         with open(languages_path, "r", encoding="utf-8") as file:
             languages = json.load(file)
 
@@ -53,14 +53,14 @@ def load_languages() -> dict[str, Language]:
 def load_flags() -> dict[str, dict[str, Any]]:
     global country_data
     if not country_data:
-        countries_path = base_dir.joinpath("countries.json")
+        countries_path = BASE_DIR.joinpath("countries.json")
         with open(countries_path, "r", encoding="utf-8") as file:
             countries = json.load(file)
 
         country_data = {country["code"]: country for country in countries}
         for country in list(country_data.values()):
-            flag_1x1 = _create_icon(base_dir.joinpath(country["flag_1x1"]))
-            flag_4x3 = _create_icon(base_dir.joinpath(country["flag_4x3"]))
+            flag_1x1 = _create_icon(BASE_DIR.joinpath(country["flag_1x1"]))
+            flag_4x3 = _create_icon(BASE_DIR.joinpath(country["flag_4x3"]))
             country["flag_1x1"] = flag_1x1
             country["flag_4x3"] = flag_4x3
 
